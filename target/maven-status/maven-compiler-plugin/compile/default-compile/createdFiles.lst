@@ -1,0 +1,5 @@
+com\tasks\tempTestData\DatabaseLoader.class
+com\tasks\dao\TaskRepository.class
+com\tasks\controllers\TaskController.class
+com\tasks\dao\Task.class
+com\tasks\SpringReactJsApplication.class

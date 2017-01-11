@@ -1,12 +1,16 @@
 package com.tasks.controllers;
 
+import com.tasks.controllers.exceptions.TaskNotFoundException;
 import com.tasks.dao.Category;
 import com.tasks.dao.CategoryRepository;
 import com.tasks.dao.Task;
 import com.tasks.dao.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -32,12 +36,15 @@ public class TaskController {
      * @param task
      */
     @RequestMapping(method = RequestMethod.POST, value = "/api/tasks", consumes = "application/json")
-    public void addTask(@RequestBody Task task) {
-        taskRepository.save(new Task(task.getTaskName(),
+    public ResponseEntity<?> addTask(@RequestBody Task task) {
+        Task savedTask = taskRepository.save(new Task(task.getTaskName(),
                 task.getTaskDescription(),
                 task.getDeadLine(),
                 task.getImageURL(),
                 task.getCategory()));
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(savedTask.getId()).toUri();
+        return ResponseEntity.created(location).build();
     }
 
     /**
@@ -58,6 +65,7 @@ public class TaskController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/api/tasks/{id}")
     public Task getTask(@PathVariable Long id) {
+        validateTask(id);
         return taskRepository.findOne(id);
     }
 
@@ -87,11 +95,20 @@ public class TaskController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/api/tasks/{id}/delete")
     public void deleteTask(@PathVariable Long id) {
+        validateTask(id);
         taskRepository.delete(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/api/categories", consumes = "application/json")
     public void addCategory(@RequestBody Category category) {
         categoryRepository.save(new Category(category.getCategoryName()));
+    }
+
+    private void validateTask(Long taskId) {
+        Task task = this.taskRepository.findOne(taskId);
+        if (task == null) {
+            String s = taskId.toString();
+            throw new TaskNotFoundException(taskId);
+        }
     }
 }

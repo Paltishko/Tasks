@@ -27,6 +27,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -193,8 +194,18 @@ public class TestControllerTest {
 
         mockMvc.perform(post("/api/tasks").contentType(contentType).content(taskJson))
                 .andExpect(status().isCreated())
-                .andExpect(content().string("/api/tasks/" +
+                .andExpect(header().stringValues("Location", "http://localhost/api/tasks/" +
                         taskRepository.findByTaskNameContainingIgnoreCaseOrTaskDescriptionContainingIgnoreCase("полить цветок", "Драцена на кухне").get(0).getId()));
+    }
+
+    @Test
+    public void deteleTask() throws Exception {
+        Task task = taskRepository.findAll().iterator().next();
+
+        mockMvc.perform(get("/api/tasks/" + task.getId() + "/delete").contentType(contentType))
+                .andExpect(status().isOk());
+
+        assertNull(taskRepository.findOne(task.getId()));
     }
 
     private String toJson(Object o) throws IOException {

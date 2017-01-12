@@ -23,27 +23,36 @@ public class TaskController {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    public TaskController(TaskRepository taskRepository,
-                          CategoryRepository categoryRepository) {
+    public TaskController(TaskRepository taskRepository, CategoryRepository categoryRepository) {
         this.taskRepository = taskRepository;
         this.categoryRepository = categoryRepository;
     }
 
 
     /**
-     * Add task received in request body
+     * Add or update task received in request body
      *
      * @param task
      */
     @RequestMapping(method = RequestMethod.POST, value = "/api/tasks", consumes = "application/json")
-    public ResponseEntity<?> addTask(@RequestBody Task task) {
-        Task savedTask = taskRepository.save(new Task(task.getTaskName(),
-                task.getTaskDescription(),
-                task.getDeadLine(),
-                task.getImageURL(),
-                task.getCategory()));
+    public ResponseEntity<?> addOrUpdateTask(@RequestBody Task task) {
+
+        if (task.getCategory().getId() == null) {
+            task.setCategory(categoryRepository.save(new Category(task.getCategory().getCategoryName())));
+        }
+
+        if (task.getId() == null) {
+            task = taskRepository.save(new Task(task.getTaskName(),
+                    task.getTaskDescription(),
+                    task.getDeadLine(),
+                    task.getImageURL(),
+                    task.getCategory()));
+        } else {
+            task = taskRepository.save(task);
+        }
+
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(savedTask.getId()).toUri();
+                .buildAndExpand(task.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -80,12 +89,6 @@ public class TaskController {
     public List<Task> searchTask(@RequestParam(value = "nameOrDesc") String searchCriteria) {
         return taskRepository.findByTaskNameContainingIgnoreCaseOrTaskDescriptionContainingIgnoreCase(
                 searchCriteria, searchCriteria);
-    }
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/api/tasks/update", consumes = "application/json")
-    public void updateTask(@RequestBody Task task) {
-        taskRepository.save(task);
     }
 
     /**

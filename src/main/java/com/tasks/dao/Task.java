@@ -25,7 +25,7 @@ public class Task {
     private LocalDateTime dateFinished;
     private LocalDateTime deadLine;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne //(cascade = CascadeType.ALL)
     private Category category;
 
     public Task (String taskName, String taskDescription, LocalDateTime deadLine, String imageURL, Category category){

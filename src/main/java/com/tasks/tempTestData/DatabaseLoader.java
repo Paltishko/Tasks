@@ -21,21 +21,20 @@ public class DatabaseLoader implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    public DatabaseLoader(TaskRepository taskRepository,
-                          CategoryRepository categoryRepository) {
+    public DatabaseLoader(TaskRepository taskRepository, CategoryRepository categoryRepository) {
         this.taskRepository = taskRepository;
         this.categoryRepository = categoryRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        Category house = new Category("HouseKeeping");
-        Category auto = new Category("Auto");
-        Category payments = new Category("Payments");
+//        Category house = new Category("HouseKeeping");
+//        Category auto = new Category("Auto");
+//        Category payments = new Category("Payments");
 
-        this.categoryRepository.save(house);
-        this.categoryRepository.save(auto);
-        this.categoryRepository.save(payments);
+        Category house = this.categoryRepository.save(new Category("HouseKeeping"));
+        Category auto = this.categoryRepository.save(new Category("Auto"));
+        Category payments = this.categoryRepository.save(new Category("Payments"));
         this.taskRepository.save(new Task(
                 "Полить цветок",
                 "Драцена на кухне",

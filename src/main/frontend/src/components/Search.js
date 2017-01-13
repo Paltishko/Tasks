@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import {FormGroup, FormControl, Button, Navbar} from 'react-bootstrap';
+import React, {Component} from "react";
+import {FormGroup, FormControl, Button, Navbar} from "react-bootstrap";
 
 class Search extends React.Component {
 
     render() {
-        return       <Navbar.Form pullLeft>
-                       <FormGroup>
-                         <FormControl type="text" placeholder="Search" />
-                       </FormGroup>
-                       {' '}
-                       <Button type="submit">Submit</Button>
-                     </Navbar.Form>
-                     ;
+        return <Navbar.Form pullLeft>
+            <FormGroup>
+                <FormControl type="text" placeholder="Search"/>
+            </FormGroup>
+            {' '}
+            <Button type="submit">Submit</Button>
+        </Navbar.Form>
+            ;
     }
 
 }

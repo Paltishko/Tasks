@@ -8,10 +8,10 @@ class ModalTask extends React.Component {
     }
 
     render() {
-        const closeModal = this.props.closeModal;
         const operation = this.props.operation;
 
-        return <Modal show={this.props.show} onHide={this.props.closeModal}>
+        return <Modal show={this.props.show}
+                      onHide={this.props.closeModalTask}>
             <Modal.Header closeButton>
                 <Modal.Title>{operation} task</Modal.Title>
             </Modal.Header>
@@ -74,8 +74,8 @@ class ModalTask extends React.Component {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={closeModal}>Close</Button>
-                <Button bsStyle="success">Save changes</Button>
+                <Button onClick={this.props.closeModalTask}>Close</Button>
+                <Button onClick={this.props.onCreateTask} bsStyle="success">Save changes</Button>
             </Modal.Footer>
         </Modal>
     }

@@ -34,7 +34,7 @@ class TaskItem extends React.Component {
                                 <ButtonGroup><Button onClick={this.props.onDeactivateTask}
                                                      bsStyle="success">
                                     Done</Button></ButtonGroup>
-                                <ButtonGroup><Button onClick={this.props.open}>
+                                <ButtonGroup><Button onClick={this.props.openUpdateTaskModal}>
                                     Edit</Button></ButtonGroup>
                                 <ButtonGroup><Button onClick={this.props.onDeleteTask}>
                                     Delete</Button></ButtonGroup>

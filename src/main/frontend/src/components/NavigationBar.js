@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import Search from './Search';
-import UserInfo from './UserInfo';
 
 class NavigationBar extends React.Component {
-    constructor(){
-        super();
-    }
 
     render() {
         return <Navbar>

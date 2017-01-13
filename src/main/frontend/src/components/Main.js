@@ -4,9 +4,6 @@ import PageBody from './PageBody';
 //import {Route, Router, browserHistory} from 'react-router';
 
 class Main extends React.Component {
-    constructor(){
-        super();
-    }
 
     render() {
         return <div>

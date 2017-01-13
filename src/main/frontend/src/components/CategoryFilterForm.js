@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import {Form, Checkbox, Button, Label, Badge} from 'react-bootstrap';
+import {Form, Checkbox, Button, Badge} from 'react-bootstrap';
 
 class CategoryFilterForm extends React.Component {
-    constructor(){
-        super();
-    }
 
     render() {
         return       <Form>

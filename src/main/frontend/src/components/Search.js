@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import {FormGroup, FormControl, Button, Navbar} from 'react-bootstrap';
 
 class Search extends React.Component {
-    constructor(){
-        super();
-    }
 
     render() {
         return       <Navbar.Form pullLeft>

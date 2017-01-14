@@ -36,6 +36,12 @@ public class DatabaseLoader implements CommandLineRunner {
         Category auto = this.categoryRepository.save(new Category("Auto"));
         Category payments = this.categoryRepository.save(new Category("Payments"));
         this.taskRepository.save(new Task(
+                "Побрить Джигурду",
+                "Эжигурдятина",
+                LocalDateTime.of(2017, 1, 26, 8, 0),
+                "http://v.img.com.ua/b/600x500/3/5d/304895efe3b4e579f1ff31917cf3b5d3.jpg",
+                house));
+        this.taskRepository.save(new Task(
                 "Полить цветок",
                 "Драцена на кухне",
                 LocalDateTime.of(2017, 1, 26, 8, 0),

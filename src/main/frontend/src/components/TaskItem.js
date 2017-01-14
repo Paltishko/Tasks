@@ -17,7 +17,7 @@ class TaskItem extends React.Component {
                             <h4>{this.props.task.taskName}</h4>
                         </Col>
                         <Col md={2} mdPush={5}>
-                            {this.props.task.deadLine}
+                            Deadline {this.props.task.deadLine}
                         </Col>
                     </Row>
                     <Row className="show-grid">
@@ -27,7 +27,7 @@ class TaskItem extends React.Component {
                     </Row>
                     <Row>
                         <Col md={3}>
-                            {this.props.task.dateAdded}
+                            Task added: {this.props.task.dateAdded}
                         </Col>
                         <Col md={6} mdPush={3}>
                             <ButtonGroup justified>

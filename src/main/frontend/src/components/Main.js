@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import $ from "jquery";
 import NavigationBar from "./NavigationBar";
 import PageBody from "./PageBody";
 import InitialData from "./InitialData";
@@ -13,6 +14,7 @@ class Main extends React.Component {
             showModalTask: false,
             operationModal: ""
         };
+        this.updateTasks = this.updateTasks.bind(this);
         this.onCreateTask = this.onCreateTask.bind(this);
         this.onDeleteTask = this.onDeleteTask.bind(this);
         this.onDeactivateTask = this.onDeactivateTask.bind(this);
@@ -20,6 +22,16 @@ class Main extends React.Component {
         this.openUpdateTaskModal = this.openUpdateTaskModal.bind(this);
         this.closeModalTask = this.closeModalTask.bind(this);
 
+    }
+
+    componentDidMount() {
+        this.updateTasks();
+    }
+
+    updateTasks() {
+        $.get("/api/tasks", (data) => {
+            this.setState({tasks: data})
+        });
     }
 
     onCreateTask() {

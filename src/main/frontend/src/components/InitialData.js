@@ -32,5 +32,6 @@ export default [{
     deadLine: [2017, 1, 20, 8, 0],
     category: {id: 2, categoryName: "Auto"},
     active: true
-}]
+}
+]
 ;

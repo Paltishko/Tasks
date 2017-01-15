@@ -24,9 +24,6 @@ class Main extends React.Component {
 
     }
 
-    componentDidMount() {
-        this.updateTasks();
-    }
 
     updateTasks() {
         $.get("/api/tasks", (data) => {
@@ -34,7 +31,49 @@ class Main extends React.Component {
         });
     }
 
-    onCreateTask() {
+    onCreateTask(taskName, taskDescription, categoryName, deadLine, imageURL) {
+        let Category = {id: null, categoryName: categoryName};
+        let Task = {
+            id: null,
+            taskName: taskName,
+            taskDescription: taskDescription,
+            imageURL: imageURL,
+            dateAdded: null,
+            dateFinished: null,
+            deadLine: deadLine,
+            category: {id: null, categoryName: categoryName},
+            active: true
+        };
+
+        console.log('A name was submitted: ' + taskName);
+        console.log('A description was submitted: ' + taskDescription);
+        console.log('A category was submitted: ' + categoryName);
+        console.log('A deadLine was submitted: ' + deadLine);
+        console.log('A deadLine was submitted: ' + imageURL);
+        console.log('A deadLine was submitted: ' + Task);
+
+
+        $.ajax({
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            type: "POST",
+            url: "/api/tasks",
+            data: JSON.stringify({
+                id: null,
+                taskName: taskName,
+                taskDescription: taskDescription,
+                imageURL: imageURL,
+                dateAdded: null,
+                dateFinished: null,
+                deadLine: deadLine,
+                category: {id: null, categoryName: categoryName},
+                active: true
+            }),
+            success: () => this.updateTasks(),
+            error: () => this.updateTasks()
+        });
 
     }
 

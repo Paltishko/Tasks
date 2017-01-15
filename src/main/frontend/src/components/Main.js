@@ -11,6 +11,7 @@ class Main extends React.Component {
         super(props);
         this.state = {
             tasks: InitialData,
+            searchCondition: null,
             showModalTask: false,
             operationModal: ""
         };
@@ -21,12 +22,26 @@ class Main extends React.Component {
         this.openCreateTaskModal = this.openCreateTaskModal.bind(this);
         this.openUpdateTaskModal = this.openUpdateTaskModal.bind(this);
         this.closeModalTask = this.closeModalTask.bind(this);
+        this.performSearch = this.performSearch.bind(this);
+    }
+
+
+    componentDidMonth(){
+        this.updateTasks();
     }
 
     updateTasks() {
         $.get("/api/tasks", (data) => {
             this.setState({tasks: data})
         });
+    }
+
+
+    performSearch(searchCondition) {
+        $.get("/api/tasks/search?nameOrDesc=" + searchCondition, (data) => {
+            this.setState({tasks: data})
+        });
+
     }
 
     onCreateTask(taskName, taskDescription, categoryName, deadLine, imageURL) {
@@ -102,7 +117,7 @@ class Main extends React.Component {
 
     render() {
         return <div>
-            <NavigationBar />
+            <NavigationBar performSearch={this.performSearch}/>
             <PageBody tasks={this.state.tasks}
                       onDeleteTask={this.onDeleteTask}
                       onDeactivateTask={this.onDeactivateTask}

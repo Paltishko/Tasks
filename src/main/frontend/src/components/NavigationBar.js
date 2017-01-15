@@ -20,7 +20,7 @@ class NavigationBar extends React.Component {
                     <NavItem eventKey={4} href="#">Completed</NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <Search />
+                    <Search performSearch={this.props.performSearch}/>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

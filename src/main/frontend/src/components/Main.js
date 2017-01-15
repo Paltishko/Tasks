@@ -21,9 +21,7 @@ class Main extends React.Component {
         this.openCreateTaskModal = this.openCreateTaskModal.bind(this);
         this.openUpdateTaskModal = this.openUpdateTaskModal.bind(this);
         this.closeModalTask = this.closeModalTask.bind(this);
-
     }
-
 
     updateTasks() {
         $.get("/api/tasks", (data) => {
@@ -32,7 +30,6 @@ class Main extends React.Component {
     }
 
     onCreateTask(taskName, taskDescription, categoryName, deadLine, imageURL) {
-        let Category = {id: null, categoryName: categoryName};
         let Task = {
             id: null,
             taskName: taskName,
@@ -77,11 +74,11 @@ class Main extends React.Component {
 
     }
 
-    onDeleteTask() {
-
+    onDeleteTask(id) {
+        $.post("/api/tasks/" + id + "/delete/", null, () => this.updateTasks());
     }
 
-    onDeactivateTask() {
+    onDeactivateTask(id) {
 
     }
 
@@ -92,7 +89,7 @@ class Main extends React.Component {
         });
     }
 
-    openUpdateTaskModal() {
+    openUpdateTaskModal(task) {
         this.setState({
             showModalTask: true,
             operationModal: "Edit"

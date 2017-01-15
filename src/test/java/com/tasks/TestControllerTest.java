@@ -202,7 +202,7 @@ public class TestControllerTest {
     public void deteleTask() throws Exception {
         Task task = taskRepository.findAll().iterator().next();
 
-        mockMvc.perform(get("/api/tasks/" + task.getId() + "/delete").contentType(contentType))
+        mockMvc.perform(post("/api/tasks/" + task.getId() + "/delete").contentType(contentType))
                 .andExpect(status().isOk());
 
         assertNull(taskRepository.findOne(task.getId()));

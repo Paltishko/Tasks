@@ -96,7 +96,7 @@ public class TaskController {
      *
      * @param id task ID
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/api/tasks/{id}/delete")
+    @RequestMapping(method = RequestMethod.POST, value = "/api/tasks/{id}/delete")
     public void deleteTask(@PathVariable Long id) {
         validateTask(id);
         taskRepository.delete(id);

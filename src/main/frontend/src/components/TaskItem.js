@@ -3,6 +3,15 @@ import {Row, Col, Image, Panel, ButtonGroup, Button} from "react-bootstrap";
 
 class TaskItem extends React.Component {
 
+    constructor (props){
+        super(props);
+        this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
+    }
+
+    handleDeleteButtonClick (){
+        this.props.onDeleteTask(this.props.task.id);
+    }
+
     render() {
         return <Row className="show-grid">
             <Col md={2}>
@@ -31,12 +40,12 @@ class TaskItem extends React.Component {
                         </Col>
                         <Col md={6} mdPush={3}>
                             <ButtonGroup justified>
-                                <ButtonGroup><Button onClick={this.props.onDeactivateTask}
+                                <ButtonGroup><Button onClick={this.props.onDeactivateTask(this.props.task.id)}
                                                      bsStyle="success">
                                     Done</Button></ButtonGroup>
                                 <ButtonGroup><Button onClick={this.props.openUpdateTaskModal}>
                                     Edit</Button></ButtonGroup>
-                                <ButtonGroup><Button onClick={this.props.onDeleteTask}>
+                                <ButtonGroup><Button onClick={this.handleDeleteButtonClick}>
                                     Delete</Button></ButtonGroup>
                             </ButtonGroup>
                         </Col>

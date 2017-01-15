@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Modal, FieldGroup, FormGroup, ControlLabel, FormControl, Form, Col} from "react-bootstrap";
+import {Button, Modal, FieldGroup, FormGroup, ControlLabel, FormControl, Form, Col, Row} from "react-bootstrap";
 
 class ModalTask extends React.Component {
 
@@ -69,50 +69,70 @@ class ModalTask extends React.Component {
                 <Modal.Title>{operation} task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form inline>
+                <Form horizontal>
                     <FormGroup >
-                        <ControlLabel>Task name</ControlLabel>
-                        <FormControl
-                            type="text"
-                            value={this.state.taskName}
-                            placeholder="Enter text"
-                            onChange={this.handleTaskNameChange}
-                        />
+                        <Col md={4}>
+                            <ControlLabel>Task name</ControlLabel>
+                        </Col>
+                        <Col md={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.taskName}
+                                placeholder="Enter text"
+                                onChange={this.handleTaskNameChange}
+                            />
+                        </Col>
                     </FormGroup>
                     <FormGroup >
-                        <ControlLabel>Task description</ControlLabel>
-                        <FormControl
-                            componentClass="textarea"
-                            value={this.state.taskDescription}
-                            placeholder="Enter text"
-                            onChange={this.handleTaskDescriptionChange}
-                        />
+                        <Col md={4}>
+                            <ControlLabel>Task description</ControlLabel>
+                        </Col>
+                        <Col md={8}>
+                            <FormControl
+                                componentClass="textarea"
+                                value={this.state.taskDescription}
+                                placeholder="Enter text"
+                                onChange={this.handleTaskDescriptionChange}
+                            />
+                        </Col>
                     </FormGroup>
                     <FormGroup >
-                        <ControlLabel>Category name</ControlLabel>
-                        <FormControl componentClass="select"
-                                     placeholder={this.state.categoryName}
-                                     onChange={this.handleCategoryChange}>
-                            <option value="Default">Default</option>
-                            <option value="Payments">Payments</option>
-                            <option value="Auto">Auto</option>
-                        </FormControl>
+                        <Col md={4}>
+                            <ControlLabel>Category name</ControlLabel>
+                        </Col>
+                        <Col md={8}>
+                            <FormControl componentClass="select"
+                                         placeholder={this.state.categoryName}
+                                         onChange={this.handleCategoryChange}>
+                                <option value="Default">Default</option>
+                                <option value="Payments">Payments</option>
+                                <option value="Auto">Auto</option>
+                            </FormControl>
+                        </Col>
                     </FormGroup>
                     <FormGroup >
-                        <ControlLabel>Deadline</ControlLabel>
-                        <input className="form-control"
-                               type="datetime-local"
-                               value={this.state.deadLine}
-                               onChange={this.handleDeadLineChange}/>
+                        <Col md={4}>
+                            <ControlLabel>Deadline</ControlLabel>
+                        </Col>
+                        <Col md={8}>
+                            <input className="form-control"
+                                   type="datetime-local"
+                                   value={this.state.deadLine}
+                                   onChange={this.handleDeadLineChange}/>
+                        </Col>
                     </FormGroup>
                     <FormGroup >
-                        <ControlLabel>Image URL</ControlLabel>
-                        <FormControl
-                            type="text"
-                            value={this.state.imageURL}
-                            placeholder="Enter text"
-                            onChange={this.handleImageURLChange}
-                        />
+                        <Col md={4}>
+                            <ControlLabel>Image URL</ControlLabel>
+                        </Col>
+                        <Col md={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.imageURL}
+                                placeholder="Enter text"
+                                onChange={this.handleImageURLChange}
+                            />
+                        </Col>
                     </FormGroup>
                 </Form>
             </Modal.Body>
